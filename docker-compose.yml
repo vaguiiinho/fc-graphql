@@ -1,0 +1,25 @@
+version: '3'
+services:
+  go:
+    container_name: go
+    build:
+      context: ./server
+    networks:
+      - graphql
+    volumes:
+      - ./server:/app
+    ports:
+      - 8000:8080 
+
+  node:
+    container_name: node
+    build:
+      context: ./client
+    networks:
+      - graphql
+    volumes:
+      - ./client:/app
+      
+networks:
+  graphql:
+    driver: bridge
